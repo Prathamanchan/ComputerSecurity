@@ -15,13 +15,12 @@ rnum=random.randrange(20,100,1)
 imgname="TheSpy"+str(rnum)+".png"
 
 def start_time():
-        time.sleep(30)
+        time.sleep(15)
+	print "Yess"
 	capture()
-	p1.terminate()
-	p1.join()
-        print(" Yess ")
 	exit()
 
+p1 = multiprocessing.Process(target=start_time)
 
 def mailme(imgname):
 	fromaddr = "kattademane@gmail.com"
@@ -52,6 +51,7 @@ def mailme(imgname):
 
 def goDude():
 	if E1.get()=="hello":
+		p1.terminate()
 		exit()
 
 	else:
@@ -81,6 +81,8 @@ def capture():
 	cmd="mv "+imgname+" close"+str(rnum)
         os.system(cmd)
         time.sleep(1)
+	p1.terminate()
+	exit()
 
 if __name__ == "__main__":
     p1 = multiprocessing.Process(target=start_time)
